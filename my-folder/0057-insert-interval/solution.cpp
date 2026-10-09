@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        int n=intervals.size();
+        vector<vector<int>> soln;
+        int i=0;
+        for(i; i <n ; i++){
+            if(intervals[i][1] < newInterval[0]){
+                soln.push_back(intervals[i]);
+            }
+            else{
+                break;
+            }
+        }
+
+        while(i<n && newInterval[1] >= intervals[i][0] ){
+            newInterval[0] = min(newInterval[0] , intervals[i][0]);
+            newInterval[1] = max(newInterval[1] , intervals[i][1]);
+            i++;
+        }
+
+        soln.push_back(newInterval);
+        while(i<n){
+            soln.push_back(intervals[i]);
+            i++;
+        }
+
+        return soln;
+
+
+    }
+};
